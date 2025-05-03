@@ -30,7 +30,7 @@ export default function Principal() {
 
   return (
     <div className="auth-container">
-      <img src="/logo1.png" alt="Brenda Logo" className="logo" />
+      <img src="/logo2.png" alt="Brenda Logo" className="logo" />
       <h1>Bem-vindo(a), {userData.nome}!</h1>
       <p><strong>Nome:</strong> {userData.nome}</p>
       <p><strong>Sobrenome:</strong> {userData.sobrenome}</p>

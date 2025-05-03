@@ -35,9 +35,23 @@ export default function Cadastro() {
       });
       navigate('/login');
     } catch (err) {
-      setError(err.message);
+      // mapa de códigos de erro → mensagens em PT-BR
+      const traduzir = {
+        'auth/weak-password':         'A senha deve ter, no mínimo, 6 caracteres.',
+        'auth/email-already-in-use':  'Este e-mail já está em uso.',
+        'auth/invalid-email':         'O formato do e-mail é inválido.',
+        'auth/user-disabled':         'Esta conta foi desativada.',
+        'auth/user-not-found':        'Usuário não encontrado.',
+        'auth/wrong-password':        'Senha incorreta.',
+        // adicione outros códigos conforme achar necessário
+      };
+  
+      // usa a tradução se existir, senão exibe a mensagem original
+      const mensagem = traduzir[err.code] || err.message;
+      setError(mensagem);
     }
   };
+  
 
   return (
     <div className="auth-container">

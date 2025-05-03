@@ -15,8 +15,19 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, senha);
       navigate('/principal');
-    } catch {
-      setError('Usuário ou senha incorretos');
+    } catch (err) {
+      // Mapa de códigos → mensagens em PT-BR
+      const traduzir = {
+        'auth/invalid-email':      'O formato do e-mail é inválido.',
+        'auth/user-disabled':      'Esta conta foi desativada.',
+        'auth/user-not-found':     'Usuário não encontrado.',
+        'auth/wrong-password':     'Senha incorreta.',
+        // outros erros que quiser tratar...
+      };
+      // usa a tradução ou uma mensagem genérica
+      const mensagem =
+        traduzir[err.code] || 'Usuário ou senha incorretos.';
+      setError(mensagem);
     }
   };
 
