@@ -23,7 +23,7 @@ export default function Login() {
   return (
     <div className="auth-container">
       {/* coloque um logo em public/logo.png */}
-      <img src="/logo.png" alt="Netshoes Logo" className="logo" />
+      <img src="/logo2.png" alt="BMMB Logo" className="logo" />
       <h1>Entrar</h1>
       {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
