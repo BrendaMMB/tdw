@@ -1,12 +1,21 @@
+// src/pages/Principal.js
 import React, { useEffect, useState } from 'react';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 export default function Principal() {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
 
+  // Desloga e redireciona para o Login
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate('/login');
+  };
+
+  // Busca os dados do usuário logado
   useEffect(() => {
     const fetchData = async () => {
       const user = auth.currentUser;
@@ -20,11 +29,13 @@ export default function Principal() {
   if (!userData) return <p>Carregando...</p>;
 
   return (
-    <div>
-      <h1>Página Principal</h1>
+    <div className="auth-container">
+      <img src="/logo.png" alt="Logo" className="logo" />
+      <h1>Bem-vindo, {userData.nome}!</h1>
       <p><strong>Nome:</strong> {userData.nome}</p>
       <p><strong>Sobrenome:</strong> {userData.sobrenome}</p>
       <p><strong>Data de Nascimento:</strong> {userData.dataNascimento}</p>
+      <button onClick={handleLogout}>Sair</button>
     </div>
   );
 }
