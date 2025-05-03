@@ -30,8 +30,8 @@ export default function Principal() {
 
   return (
     <div className="auth-container">
-      <img src="/logo.png" alt="Logo" className="logo" />
-      <h1>Bem-vindo, {userData.nome}!</h1>
+      <img src="/logo1.png" alt="Brenda Logo" className="logo" />
+      <h1>Bem-vindo(a), {userData.nome}!</h1>
       <p><strong>Nome:</strong> {userData.nome}</p>
       <p><strong>Sobrenome:</strong> {userData.sobrenome}</p>
       <p><strong>Data de Nascimento:</strong> {userData.dataNascimento}</p>
