@@ -22,17 +22,16 @@ export default function Cadastro() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const userCred = await createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         form.email,
         form.senha
       );
-      const uid = userCred.user.uid;
-      await setDoc(doc(db, 'users', uid), {
+      await setDoc(doc(db, 'users', user.uid), {
         nome: form.nome,
         sobrenome: form.sobrenome,
         dataNascimento: form.dataNascimento,
-        uid
+        uid: user.uid
       });
       navigate('/login');
     } catch (err) {
@@ -41,14 +40,15 @@ export default function Cadastro() {
   };
 
   return (
-    <div>
-      <h1>Cadastro</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="auth-container">
+      <img src="/logo.png" alt="Netshoes Logo" className="logo" />
+      <h1>Criar conta</h1>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           name="email"
           type="email"
-          placeholder="E-mail"
+          placeholder="Endereço de e-mail"
           onChange={handleChange}
           required
         />
@@ -81,7 +81,7 @@ export default function Cadastro() {
         />
         <button type="submit">Cadastrar</button>
       </form>
-      <p>
+      <p className="link-text">
         Já tem conta? <Link to="/login">Faça login aqui</Link>
       </p>
     </div>

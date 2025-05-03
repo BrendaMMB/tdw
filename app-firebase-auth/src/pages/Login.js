@@ -15,19 +15,21 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, senha);
       navigate('/principal');
-    } catch (err) {
+    } catch {
       setError('Usuário ou senha incorretos');
     }
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="auth-container">
+      {/* coloque um logo em public/logo.png */}
+      <img src="/logo.png" alt="Netshoes Logo" className="logo" />
+      <h1>Entrar</h1>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
-          placeholder="E-mail"
+          placeholder="Endereço de e-mail"
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
@@ -39,9 +41,9 @@ export default function Login() {
           onChange={e => setSenha(e.target.value)}
           required
         />
-        <button type="submit">Acessar</button>
+        <button type="submit">Entrar</button>
       </form>
-      <p>
+      <p className="link-text">
         Não tem conta? <Link to="/cadastro">Cadastre-se aqui</Link>
       </p>
     </div>
